@@ -41,12 +41,18 @@ class TestUserDetailTestCase(APITestCase):
 
     def setUp(self):
         self.user = UserFactory()
+        self.user2 = UserFactory()
         self.url = reverse("user-detail", kwargs={"pk": self.user.pk})
+        self.url2 = reverse("user-detail", kwargs={"pk": self.user2.pk})
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.user.auth_token}")
 
     def test_get_request_returns_a_given_user(self):
         response = self.client.get(self.url)
         assert response.status_code == status.HTTP_200_OK
+
+    def test_get_request_does_not_return_a_given_user(self):
+        response = self.client.get(self.url2)
+        assert response.status_code == status.HTTP_403_FORBIDDEN
 
     def test_put_request_updates_a_user(self):
         new_first_name = fake.first_name()
