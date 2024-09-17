@@ -58,10 +58,11 @@ class Common(Configuration):
         "host": os.getenv("DATABASE_URL", "postgres"),
         "port": os.getenv("DATABASE_PORT", "5432"),
     }
+    print(f"postgres://{_db_config['user']}:{_db_config['password']}@{_db_config['host']}:{_db_config['port']}/{_db_config['dbname']}")
     # Postgres
     DATABASES = {
         'default': dj_database_url.config(
-            default=f"postgres://{_db_config['dbname']}:{_db_config['password']}@{_db_config['host']}:{_db_config['port']}/{_db_config['dbname']}",
+            default=f"postgres://{_db_config['user']}:{_db_config['password']}@{_db_config['host']}:{_db_config['port']}/{_db_config['dbname']}",
             conn_max_age=int(os.getenv('POSTGRES_CONN_MAX_AGE', 600))
         )
     }
