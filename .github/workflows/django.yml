@@ -45,3 +45,8 @@ jobs:
         DATABASE_HOST: localhost
       run: |
         python manage.py test
+    - name: Django Coverage action
+      uses: actions/python-django-coverage-gitHub-action@0.9
+      with:
+        django-app: 'project'
+        minimum-coverage: '86'
