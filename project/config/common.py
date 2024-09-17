@@ -55,7 +55,7 @@ class Common(Configuration):
         "dbname": os.getenv("POSTGRES_DB", "postgres"),
         "user": os.getenv("POSTGRES_USER", "postgres"),
         "password": os.getenv("POSTGRES_PASSWORD", ""),
-        "host": os.getenv("DATABASE_URL", "postgres"),
+        "host": os.getenv("DATABASE_HOST", "postgres"),
         "port": os.getenv("DATABASE_PORT", "5432"),
     }
     print(f"postgres://{_db_config['user']}:{_db_config['password']}@{_db_config['host']}:{_db_config['port']}/{_db_config['dbname']}")

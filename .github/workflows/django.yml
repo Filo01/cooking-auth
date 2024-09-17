@@ -41,6 +41,6 @@ jobs:
     - name: Run Tests
       env:
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        DATABASE_URL: localhost
+        DATABASE_HOST: localhost
       run: |
         python manage.py test
