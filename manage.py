@@ -10,6 +10,7 @@ def main():
 
     try:
         from configurations.management import execute_from_command_line
+
         execute_from_command_line(sys.argv)
     except ImportError:
         # The above import may fail for some other reason. Ensure that the
@@ -24,10 +25,7 @@ def main():
                 "forget to activate a virtual environment?"
             )
         raise
-    
-    
-    
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
