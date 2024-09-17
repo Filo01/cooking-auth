@@ -10,7 +10,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-      target: builder
+      target: runtime
     command: >
       bash -c "python3 wait_for_postgres.py &&
                ./manage.py migrate &&
@@ -23,7 +23,10 @@ services:
       - postgres
   documentation:
     restart: always
-    build: ./
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: runtime
     command: "python3 -m mkdocs serve"
     volumes:
       - .:/code:cached
