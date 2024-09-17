@@ -41,6 +41,7 @@ jobs:
     - name: Run Tests
       env:
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        POSTGRES_PASSWORD: postgres
         DATABASE_HOST: localhost
       run: |
         python manage.py test
