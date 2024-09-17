@@ -44,7 +44,7 @@ jobs:
         POSTGRES_PASSWORD: postgres
         DATABASE_HOST: localhost
       run: |
-        python -m coverage manage.py test project
+        python -m coverage run --source=project manage.py test project
         COVERAGE_RESULT=`python -m coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g'`
         MIN_COVERAGE=10
         if [[ $COVERAGE_RESULT -gt $MIN_COVERAGE ]]; then
