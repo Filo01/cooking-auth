@@ -1,0 +1,5 @@
+-r common.txt
+
+ruff==0.6.5
+black==24.8.0
+pre-commit==3.8.0
