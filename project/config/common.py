@@ -52,9 +52,6 @@ class Common(Configuration):
         "host": os.getenv("DATABASE_HOST", "postgres"),
         "port": os.getenv("DATABASE_PORT", "5432"),
     }
-    print(
-        f"postgres://{_db_config['user']}:{_db_config['password']}@{_db_config['host']}:{_db_config['port']}/{_db_config['dbname']}"
-    )
     # Postgres
     DATABASES = {
         "default": dj_database_url.config(
