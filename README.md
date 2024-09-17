@@ -14,12 +14,13 @@ A user authentication microservice for an online cooking forum. Check out the pr
 
 # Local Development with VSCode and Devcontainers
 
-In VSCode press `F1` to bring up the `Command Palette`, type in `>Dev Containers: Rebuild and Reopen in Container`
+In VSCode press `F1` to bring up the `Command Palette`, type in `>Dev Containers: Rebuild and Reopen in Container`.
 
-Then you che debug django from VSCode from the `Run and Debug` panel.
+Then you can debug django from VSCode from the `Run and Debug` panel.
 
 When using git inside the Devcontainer you are going to need to configure it to use the git credentials on host your machine [as described here](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials)
 
+To install pre-commit hooks, just run from the VSCode integrated terminal `pre-commit install` the first time you open the project. It will install the pre-commit hooks automatically.
 
 # Run locally without VSCode
 
