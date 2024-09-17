@@ -43,13 +43,12 @@ jobs:
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
         POSTGRES_PASSWORD: postgres
         DATABASE_HOST: localhost
+        MIN_COVERAGE: 10
       run: |
         python -m coverage run --source=project manage.py test project
         COVERAGE_RESULT=`python -m coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g'`
-        MIN_COVERAGE=10
-        if [[ $COVERAGE_RESULT -gt $MIN_COVERAGE ]]; then
-            echo ::set-output name=coverage_result::$COVERAGE_RESULT
-        else
+        echo python -m coverage report
+        if [[ $MIN_COVERAGE -gt $COVERAGE_RESULT ]]; then
             echo "#################################################"
             echo "Code coverage below allowed threshold ($COVERAGE_RESULT<$MIN_COVERAGE)"
             python -m coverage report
