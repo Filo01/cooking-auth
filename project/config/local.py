@@ -10,7 +10,4 @@ class Local(Common):
     # Testing
     INSTALLED_APPS = Common.INSTALLED_APPS
 
-    # Mail
-    EMAIL_HOST = "localhost"
-    EMAIL_PORT = 1025
     EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
