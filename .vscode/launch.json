@@ -19,6 +19,22 @@
             },
             "program": "${workspaceFolder}/manage.py",
             "justMyCode":false
+        },
+        {
+            "name": "Python Debugger: Test Django",
+            "type": "debugpy",
+            "request": "launch",
+            "args": [
+                "test",
+                "project"
+            ],
+            "django": true,
+            "autoStartBrowser": false,
+            "env": {
+                "DJANGO_DEBUG": "true"
+            },
+            "program": "${workspaceFolder}/manage.py",
+            "justMyCode":false
         }
     ]
 }

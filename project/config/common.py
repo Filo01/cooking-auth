@@ -17,7 +17,6 @@ class Common(Configuration):
         "django.contrib.staticfiles",
         # Third party apps
         "rest_framework",  # utilities for rest apis
-        "rest_framework.authtoken",  # token authentication
         "django_filters",  # for filtering rest endpoints
         "rest_framework_simplejwt",
         # Your apps
@@ -192,8 +191,9 @@ class Common(Configuration):
             "rest_framework.permissions.IsAuthenticated",
         ],
         "DEFAULT_AUTHENTICATION_CLASSES": (
-            "rest_framework_simplejwt.authentication.JWTStatelessUserAuthentication",
             "rest_framework.authentication.SessionAuthentication",
-            "rest_framework.authentication.TokenAuthentication",
+            # "rest_framework.authentication.TokenAuthentication",
+            "rest_framework_simplejwt.authentication.JWTAuthentication",
+            # "project.users.authentication.CustomJWTAuthentication",
         ),
     }
