@@ -39,7 +39,6 @@ docker-compose run --rm web [command]
 
 The django admin page is located at [http://localhost:7070/admin/](http://localhost:7070/admin/)
 
-From the browser you can navigate to the standard Django Rest Framework browseable api views at the following urls:
-- [http://localhost:7070/api/v1/token/](http://localhost:7070/api/v1/token/) to
+Documentation is at [http://localhost:7071/api/users/](http://localhost:7071/api/users/)
 
-# Testing
+Swagger ui is at [http://localhost:7070/api/v1/schema/swagger-ui/#/](http://localhost:7070/api/v1/schema/swagger-ui/#/)

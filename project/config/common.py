@@ -18,6 +18,8 @@ class Common(Configuration):
         # Third party apps
         "rest_framework",  # utilities for rest apis
         "django_filters",  # for filtering rest endpoints
+        "drf_spectacular",
+        "drf_spectacular_sidecar",
         "rest_framework_simplejwt",
         # Your apps
         "project.users",
@@ -181,11 +183,12 @@ class Common(Configuration):
     # Django Rest Framework
     REST_FRAMEWORK = {
         "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+        "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
         "PAGE_SIZE": int(os.getenv("DJANGO_PAGINATION_LIMIT", 10)),
         "DATETIME_FORMAT": "%Y-%m-%dT%H:%M:%S%z",
         "DEFAULT_RENDERER_CLASSES": (
             "rest_framework.renderers.JSONRenderer",
-            "rest_framework.renderers.BrowsableAPIRenderer",
+            # "rest_framework.renderers.BrowsableAPIRenderer",
         ),
         "DEFAULT_PERMISSION_CLASSES": [
             "rest_framework.permissions.IsAuthenticated",
@@ -196,4 +199,14 @@ class Common(Configuration):
             "rest_framework_simplejwt.authentication.JWTAuthentication",
             # "project.users.authentication.CustomJWTAuthentication",
         ),
+    }
+
+    SPECTACULAR_SETTINGS = {
+        "TITLE": "Cooking Auth",
+        "DESCRIPTION": "An authentication microservice for a cooking forum",
+        "VERSION": "0.0.1",
+        "SERVE_INCLUDE_SCHEMA": False,
+        "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+        "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+        "REDOC_DIST": "SIDECAR",
     }

@@ -37,3 +37,26 @@ class OTPSerializer(serializers.Serializer):
 class FirstStepLoginSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     password = serializers.CharField(required=True)
+
+
+class TokenResponseSerializer(serializers.Field):
+    access = serializers.CharField(required=True)
+    refresh = serializers.CharField(required=True)
+
+
+class LoginResponseSerializer(serializers.Serializer):
+    message = serializers.CharField(required=True)
+    token = serializers.DictField(child=TokenResponseSerializer())
+
+
+class OTPLink(serializers.Field):
+    rel = serializers.CharField(required=True)
+    href = serializers.CharField(required=True)
+    method = serializers.CharField(required=True)
+    body = serializers.DictField(child=serializers.DictField())
+
+
+class OTPResponseSerializer(serializers.Serializer):
+    message = serializers.CharField(required=True)
+    token = serializers.CharField()
+    _links = serializers.ListField(child=OTPLink())

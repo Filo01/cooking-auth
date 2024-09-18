@@ -7,12 +7,15 @@ from .serializers import (
     CreateUserSerializer,
     UserSerializer,
     OTPSerializer,
+    OTPResponseSerializer,
     FirstStepLoginSerializer,
+    LoginResponseSerializer,
 )
 from rest_framework_simplejwt.tokens import RefreshToken, Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.utils import timezone
+from drf_spectacular.utils import extend_schema
 
 OTP_MAX_ERRORS = 3
 
@@ -38,9 +41,16 @@ class UserViewSet(
         return self.serializer_class
 
 
+@extend_schema(
+    request=FirstStepLoginSerializer,
+    responses={202: LoginResponseSerializer, 200: OTPResponseSerializer},
+)
 @api_view(http_method_names=["POST"])
 @permission_classes([IsNotAuthenticated])
 def jwt_login(request, **kwargs):
+    """
+    Login to obtain a jwt or get redirected to the OTP endpoint.
+    """
     serializer = FirstStepLoginSerializer(data=request.data)
     serializer.is_valid()
     validated_data = serializer.validated_data
@@ -66,7 +76,7 @@ def jwt_login(request, **kwargs):
                     {
                         "href": f"/api/v1/login/{user.id}/otp/",
                         "method": "POST",
-                        "body": {"otp": {"type": "str"}},
+                        "body": {"code": {"type": "str"}},
                     }
                 ],
             )
@@ -75,9 +85,16 @@ def jwt_login(request, **kwargs):
     return _generate_successful_login_jwt_response(user)
 
 
+@extend_schema(
+    request=OTPSerializer,
+    responses={200: LoginResponseSerializer},
+)
 @api_view(http_method_names=["POST"])
 @permission_classes([IsNotAuthenticated])
 def jwt_login_via_otp(request, pk, **kwargs):
+    """
+    Endpoint to validate the endpoint and proceed with 2fa jwt login.
+    """
     user: User = User.objects.filter(id=pk).first()
     if not user or not user.has_2fa:
         return Response(status=status.HTTP_401_UNAUTHORIZED)
