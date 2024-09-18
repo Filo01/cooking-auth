@@ -20,18 +20,38 @@ class TestUserListTestCase(APITestCase):
     def setUp(self):
         self.url = reverse("user-list")
         self.user_data = factory.build(dict, FACTORY_CLASS=UserFactory)
+        self.client.logout()
+
+    def test_get_request(self):
+        response = self.client.get(self.url)
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
 
     def test_post_request_with_no_data_fails(self):
+        self.client.logout()
         response = self.client.post(self.url, {})
         assert response.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_post_request_with_valid_data_succeeds(self):
+        self.client.logout()
         response = self.client.post(self.url, self.user_data)
         assert response.status_code == status.HTTP_201_CREATED
 
         user = User.objects.get(pk=response.data.get("id"))
         assert user.username == self.user_data.get("username")
         assert check_password(self.user_data.get("password"), user.password)
+        assert not user.has_2fa
+
+    def test_post_request_with_has_2fa_succeeds(self):
+        self.client.logout()
+        user_data_2fa = factory.build(dict, FACTORY_CLASS=UserFactory)
+        user_data_2fa["has_2fa"] = True
+        response = self.client.post(self.url, user_data_2fa)
+        assert response.status_code == status.HTTP_201_CREATED
+
+        user = User.objects.get(pk=response.data.get("id"))
+        assert user.username == user_data_2fa.get("username")
+        assert check_password(user_data_2fa.get("password"), user.password)
+        assert user.has_2fa
 
 
 class TestUserDetailTestCase(APITestCase):
@@ -56,3 +76,19 @@ class TestUserDetailTestCase(APITestCase):
 
         user = User.objects.get(pk=self.user.id)
         assert user.first_name == new_first_name
+
+    def test_put_request_updates_a_user_2fa(self):
+        payload = {"has_2fa": True}
+        response = self.client.put(self.url, payload)
+        assert response.status_code == status.HTTP_200_OK
+
+        user = User.objects.get(pk=self.user.id)
+        assert user.has_2fa
+
+    def test_get_request_gets_a_user(self):
+        response = self.client.get(self.url)
+        assert response.status_code == status.HTTP_200_OK
+
+        user = User.objects.get(pk=self.user.id)
+        assert user.has_2fa == response.data.get("has_2fa")
+        assert user.username == response.data.get("username")

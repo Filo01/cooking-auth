@@ -19,6 +19,11 @@ class TestCreateUserSerializer(TestCase):
         serializer = CreateUserSerializer(data=self.user_data)
         assert serializer.is_valid()
 
+    def test_serializer_with_valid_2fa_data(self):
+        serializer = CreateUserSerializer(data=self.user_data)
+        serializer.has_2fa = True
+        assert serializer.is_valid()
+
     def test_serializer_hashes_password(self):
         serializer = CreateUserSerializer(data=self.user_data)
         assert serializer.is_valid()

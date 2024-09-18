@@ -17,7 +17,8 @@
             "env": {
                 "DJANGO_DEBUG": "true"
             },
-            "program": "${workspaceFolder}/manage.py"
+            "program": "${workspaceFolder}/manage.py",
+            "justMyCode":false
         }
     ]
 }
