@@ -42,7 +42,7 @@ jobs:
         DJANGO_SECRET_KEY: ${{ secrets.SECRET_KEY }}
         POSTGRES_PASSWORD: postgres
         DATABASE_HOST: localhost
-        MIN_COVERAGE: 10
+        MIN_COVERAGE: 87
       run: |
         python -m coverage run --source=project manage.py test project
         COVERAGE_RESULT=`python -m coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g'`
@@ -56,4 +56,3 @@ jobs:
 
         echo "#################################################"
         echo "Completed ${GITHUB_WORKFLOW}:${GITHUB_ACTION}"
-
