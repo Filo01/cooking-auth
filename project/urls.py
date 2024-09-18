@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic.base import RedirectView
 from rest_framework.routers import DefaultRouter
-from .users.views import UserViewSet
+from .users.views import UserViewSet, jwt_login, jwt_login_via_otp
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -13,10 +13,12 @@ from rest_framework_simplejwt.views import (
 from rest_framework.schemas import get_schema_view
 
 router = DefaultRouter()
-router.register(r"users", UserViewSet)
+router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/v1/login/", jwt_login),
+    path("api/v1/login/<uuid:pk>/otp", jwt_login_via_otp),
     path("api/v1/", include(router.urls)),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),

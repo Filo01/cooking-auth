@@ -28,3 +28,12 @@ class CreateUserSerializer(serializers.ModelSerializer):
             "has_2fa",
         )
         extra_kwargs = {"password": {"write_only": True}}
+
+
+class OTPSerializer(serializers.Serializer):
+    code = serializers.CharField(min_length=6, max_length=6, required=True)
+
+
+class FirstStepLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True)
