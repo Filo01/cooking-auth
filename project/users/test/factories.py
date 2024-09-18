@@ -1,4 +1,5 @@
 import factory
+from datetime import datetime, timedelta
 
 
 class UserFactory(factory.django.DjangoModelFactory):
@@ -22,3 +23,14 @@ class UserFactory(factory.django.DjangoModelFactory):
     is_active = True
     is_staff = False
     has_2fa = False
+
+
+class OTPFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = "users.OTP"
+
+    code = factory.Faker("pystr", min_chars=6, max_chars=6)
+    state = "VALID"
+    expires_at = datetime.now() + timedelta(minutes=5)
+    error_count = 0
+    user = factory.SubFactory(UserFactory)

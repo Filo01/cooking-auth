@@ -25,8 +25,15 @@ class CreateUserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "email",
-            "auth_token",
             "has_2fa",
         )
-        read_only_fields = ("auth_token",)
         extra_kwargs = {"password": {"write_only": True}}
+
+
+class OTPSerializer(serializers.Serializer):
+    code = serializers.CharField(min_length=6, max_length=6, required=True)
+
+
+class FirstStepLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(required=True)
