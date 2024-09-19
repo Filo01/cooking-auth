@@ -39,6 +39,6 @@ docker-compose run --rm web [command]
 
 The django admin page is located at [http://localhost:7070/admin/](http://localhost:7070/admin/)
 
-Documentation is at [http://localhost:7071/api/users/](http://localhost:7071/api/users/)
+Documentation is at [http://localhost:7071/api/users/](http://localhost:7071/api/users/) or you can find the hosted version [here](https://filo01.github.io/cooking_auth/)
 
 Swagger ui is at [http://localhost:7070/api/v1/schema/swagger-ui/#/](http://localhost:7070/api/v1/schema/swagger-ui/#/)
