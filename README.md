@@ -1,6 +1,7 @@
 # cooking_auth
 
 <!-- [![Build Status](https://travis-ci.org/Filo01/cooking_auth.svg?branch=master)](https://travis-ci.org/Filo01/cooking_auth) -->
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/6b9e815fe0e94069bbe6d36879d91772)](https://app.codacy.com/gh/Filo01/cooking_auth/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Built with](https://img.shields.io/badge/Built_with-Cookiecutter_Django_Rest-F7B633.svg)](https://github.com/agconti/cookiecutter-django-rest)
 
 A user authentication microservice for an online cooking forum. Check out the project's [documentation](http://Filo01.github.io/cooking_auth/).
