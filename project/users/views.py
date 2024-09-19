@@ -16,6 +16,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from django.utils import timezone
 from drf_spectacular.utils import extend_schema
+from django.core.mail import send_mail
+
 
 OTP_MAX_ERRORS = 3
 
@@ -64,10 +66,16 @@ def jwt_login(request, **kwargs):
         otp = OTP.objects.filter(user=user).first()
 
         if not otp:
-            OTP.objects.create_otp(user=user)
+            otp = OTP.objects.create_otp(user=user)
         elif otp.state != OTPState.VALID:
             otp.delete()
-            OTP.objects.create_otp(user=user)
+            otp = OTP.objects.create_otp(user=user)
+        send_mail(
+            from_email=None,
+            recipient_list=[user.email],
+            subject="Your OTP for Cooking Forum",
+            message=f"Your OTP code {otp.code} and will expire at: {otp.expires_at}",
+        )
 
         return Response(
             LoginResponseOtp(
