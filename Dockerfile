@@ -2,7 +2,7 @@ FROM python:3.12-slim as base
 FROM base as builder
 
 # Allows docker to cache installed dependencies between builds
-RUN apt-get update && apt-get -y install --no-install-recommends libpq-dev gcc && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get -y install libpq-dev gcc
 COPY ./requirements requirements
 RUN pip3 install --no-cache-dir --target=packages -r requirements/prod.txt
 
@@ -31,7 +31,7 @@ USER root
 COPY --from=builder packages /usr/lib/python3.12/site-packages
 ENV PYTHONPATH=/usr/lib/python3.12/site-packages
 
-RUN apt-get update && apt-get -y install git 
+RUN apt-get update && apt-get -y install git
 COPY ./requirements requirements
 RUN pip3 install --no-cache-dir -r requirements/dev.txt
 RUN useradd -m nonroot
