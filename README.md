@@ -5,14 +5,13 @@
 
 A user authentication microservice for an online cooking forum. Check out the project's [documentation](http://Filo01.github.io/cooking_auth/).
 
-# Prerequisites
+## Prerequisites
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)
 - [VS Code](https://code.visualstudio.com/)
 - [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-
-# Local Development with VSCode and Devcontainers
+## Local Development with VSCode and Devcontainers
 
 In VSCode press `F1` to bring up the `Command Palette`, type in `>Dev Containers: Rebuild and Reopen in Container`.
 
@@ -22,7 +21,7 @@ When using git inside the Devcontainer you are going to need to configure it to 
 
 To install pre-commit hooks, just run from the VSCode integrated terminal `pre-commit install` the first time you open the project. It will install the pre-commit hooks automatically.
 
-# Run locally without VSCode
+## Run locally without VSCode
 
 Start the dev server for local development:
 ```bash
@@ -35,7 +34,7 @@ Run a command inside the docker container:
 docker-compose run --rm web [command]
 ```
 
-# Accessing the development server
+## Accessing the development server
 
 The django admin page is located at [http://localhost:7070/admin/](http://localhost:7070/admin/)
 
