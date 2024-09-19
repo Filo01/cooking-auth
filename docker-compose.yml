@@ -7,14 +7,14 @@ services:
     restart: always
     environment:
       - DJANGO_SECRET_KEY=local
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       target: runtime
     command: >
-      bash -c "python3 wait_for_postgres.py &&
+      bash -c "cd /code/ && python3 wait_for_postgres.py &&
                ./manage.py migrate &&
-               ./manage.py runserver 0.0.0.0:7070 --settings=project.config.production"
+               ./manage.py runserver 0.0.0.0:7070"
     volumes:
       - .:/code:cached
     ports:
@@ -23,7 +23,7 @@ services:
       - postgres
   documentation:
     restart: always
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
       target: runtime
