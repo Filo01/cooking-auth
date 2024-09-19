@@ -4,11 +4,11 @@
 
 A user authentication microservice for an online cooking forum. Check out the project's [documentation](http://Filo01.github.io/cooking_auth/).
 
-# Prerequisites
+## Prerequisites
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)
 
-# Initialize the project
+## Initialize the project
 
 Start the dev server for local development:
 
@@ -22,6 +22,6 @@ Create a superuser to login to the admin:
 docker-compose run --rm web ./manage.py createsuperuser
 ```
 
-# Swagger-ui
+## Swagger-ui
 
 You can find the swagger ui at [http://localhost:7070/api/v1/schema/swagger-ui](http://localhost:7070/api/v1/schema/swagger-ui)

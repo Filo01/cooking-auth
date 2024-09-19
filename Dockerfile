@@ -10,7 +10,7 @@ FROM base as runtime
 COPY --from=builder packages /usr/lib/python3.12/site-packages
 ENV PYTHONPATH=/usr/lib/python3.12/site-packages
 
-# Security Context 
+# Security Context
 RUN useradd -m nonroot
 USER nonroot
 
@@ -31,15 +31,15 @@ USER root
 COPY --from=builder packages /usr/lib/python3.12/site-packages
 ENV PYTHONPATH=/usr/lib/python3.12/site-packages
 
-RUN apt-get update && apt-get -y install git 
+RUN apt-get update && apt-get -y install git
 COPY ./requirements requirements
 RUN pip3 install --no-cache-dir -r requirements/dev.txt
-
+RUN useradd -m nonroot
+USER nonroot
 
 FROM devcontainer-builder as devcontainer
 
+USER root
 RUN useradd -m nonroot
 RUN usermod --shell /usr/bin/bash nonroot
 USER nonroot
-
-
