@@ -9,6 +9,7 @@ A user authentication microservice for an online cooking forum. Check out the pr
 ## Prerequisites
 
 - [Docker](https://docs.docker.com/docker-for-mac/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 - [VS Code](https://code.visualstudio.com/)
 - [Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
