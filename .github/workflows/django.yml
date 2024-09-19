@@ -44,7 +44,7 @@ jobs:
         DATABASE_HOST: localhost
         MIN_COVERAGE: 87
       run: |
-        python -m coverage run --source=project manage.py test project
+        python -m coverage run --source=project manage.py test project --configuration=Test
         COVERAGE_RESULT=`python -m coverage report | grep TOTAL | awk 'N=1 {print $NF}' | sed 's/%//g'`
         echo python -m coverage report
         if [[ $MIN_COVERAGE -gt $COVERAGE_RESULT ]]; then
