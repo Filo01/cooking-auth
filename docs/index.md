@@ -104,7 +104,7 @@ Response:
 }
 ```
 
-## Login via OTP
+### Login via OTP
 
 Use OTP (which you can find in stdout) and the `_links[0].href` from the previous response.
 
@@ -129,7 +129,7 @@ Response:
 }
 ```
 
-## Use the token to access user info:
+### Use the token to access user info:
 
 Request:
 ```bash
